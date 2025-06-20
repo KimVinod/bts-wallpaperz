@@ -1,7 +1,6 @@
 # Bangtan Wallpaperz
 
 <!--<a href='https://play.google.com/store/apps/details?id=com.kimvinod.bts_lyricz'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80" /></a>-->
-Coming soon on Google Play Store!
 
 ## Description
 An android application using flutter framework which shows HD wallpapers of the biggest group BTS.

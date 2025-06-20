@@ -19,7 +19,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   late Future<QuerySnapshot> fetchWallpapersByCategory;
 
-  init() {
+  void init() {
     fetchWallpapersByCategory = WallpaperService.fetchWallpapersByCategory(widget.keyName);
   }
 
@@ -86,7 +86,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             clipBehavior: Clip.antiAlias,
                             elevation: 0,
                             margin: const EdgeInsets.all(6),
-                            color: Theme.of(context).colorScheme.surfaceVariant,
+                            color: Theme.of(context).colorScheme.surfaceContainerHighest,
                             child: CachedNetworkImage(
                               imageUrl: wallpaper.thumb,
                               fit: BoxFit.fill,

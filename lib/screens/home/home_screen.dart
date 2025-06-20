@@ -43,19 +43,19 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<bool> onWillPop() {
-    if(_currentIndex != 0) {
+  void onPop(bool didPop, dynamic result) {
+    if (_currentIndex != 0) {
       bottomTapped(0);
-      return Future.value(false);
     } else {
-      return Future.value(true);
+      Navigator.pop(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: onWillPop,
+    return PopScope(
+      canPop: _currentIndex == 0,
+      onPopInvokedWithResult: onPop,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Bangtan Wallpaperz", style: TextStyle(fontWeight: FontWeight.w500)),
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: const Text("Yes"),
                       onPressed: () {
                         WallpaperService.removeAllImages(context).then((value) {
-                          Navigator.pop(context);
+                          if(context.mounted) Navigator.pop(context);
                           bottomTapped(0);
                         });
                       },

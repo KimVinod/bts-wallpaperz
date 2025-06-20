@@ -1,4 +1,3 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -32,8 +31,6 @@ class FirebaseService {
     }
   }
 
-  static void _setupAnalytics(bool isRelease) => FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(isRelease);
-
   static Future<void> _setupMessaging() async {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
@@ -54,7 +51,6 @@ class FirebaseService {
   static Future<void> setup({required bool isRelease}) async {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     _setupCrashlytics(isRelease);
-    _setupAnalytics(isRelease);
     await _setupMessaging();
   }
 

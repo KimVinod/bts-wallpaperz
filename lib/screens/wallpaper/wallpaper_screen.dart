@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:bts_wallpaperz/screens/home/home_screen.dart';
 import 'package:bts_wallpaperz/services/wallpaper_service.dart';
 import 'package:bts_wallpaperz/utils/ui_constants.dart';
-import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:wallpaper_manager_plus/wallpaper_manager_plus.dart';
 
 class WallpaperScreen extends StatefulWidget {
   final String fullResWallpaperUrl;
@@ -23,7 +23,7 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
       body: CircularMenu(
         key: key,
         items: [
@@ -64,7 +64,7 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
                                   contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                                   onTap: () async {
                                     clicked();
-                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManager.HOME_SCREEN);
+                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManagerPlus.homeScreen);
                                   },
                                 ),
                                 ListTile(
@@ -72,7 +72,7 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
                                   contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                                   onTap: () async {
                                     clicked();
-                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManager.LOCK_SCREEN);
+                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManagerPlus.lockScreen);
                                   },
                                 ),
                                 ListTile(
@@ -80,7 +80,7 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
                                   contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                                   onTap: () async {
                                     clicked();
-                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManager.BOTH_SCREEN);
+                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManagerPlus.bothScreens);
                                   },
                                 ),
                               ],
@@ -148,31 +148,31 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
               : CachedNetworkImage(
             imageUrl: widget.fullResWallpaperUrl,
             fit: BoxFit.cover,
-            progressIndicatorBuilder: (_, __, ___) => Column(
+            progressIndicatorBuilder: (_, __, downloadProgress) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Card(
                   elevation: 0,
-                  color: Theme.of(context).colorScheme.surfaceVariant,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         CircularProgressIndicator(
-                          value: ___.progress,
+                          value: downloadProgress.progress,
                         ),
                         const SizedBox(height: 20),
                         const Text("Downloading full HD"),
                         const SizedBox(height: 10),
-                        if(___.totalSize != null) Text("${(___.downloaded / (1024 * 1024)).toStringAsFixed(2)} MB / ${(___.totalSize! / (1024 * 1024)).toStringAsFixed(2)} MB"),
+                        if(downloadProgress.totalSize != null) Text("${(downloadProgress.downloaded / (1024 * 1024)).toStringAsFixed(2)} MB / ${(downloadProgress.totalSize! / (1024 * 1024)).toStringAsFixed(2)} MB"),
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-            errorWidget: (_, __, ___) => const Center(
+            errorWidget: (_, __, downloadProgress) => const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

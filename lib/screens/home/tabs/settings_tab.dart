@@ -15,7 +15,7 @@ class _SettingsTabState extends State<SettingsTab> {
   double imagesSize = 0, cacheSize = 0;
   List<File> images = [];
 
-  init() async {
+  void init() async {
     images = await WallpaperService.loadImages();
     imagesSize = await WallpaperService.getImagesSize();
     cacheSize = await WallpaperService.getCacheSize();
