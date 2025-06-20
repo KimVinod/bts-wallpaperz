@@ -60,6 +60,7 @@ class BTSWallpaperzAppState extends State<BTSWallpaperzApp> {
     return DynamicColorBuilder(
       builder: (lightColorScheme, darkColorScheme) {
         return MaterialApp(
+          title: "Bangtan Wallpaperz",
           theme: ThemeData(
             colorScheme: _isMaterialYou ? lightColorScheme ?? defaultColorScheme : defaultColorScheme,
             useMaterial3: true,
