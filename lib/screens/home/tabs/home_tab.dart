@@ -20,7 +20,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
   //Stream<QuerySnapshot> fetchAllWapapers() => FirebaseFirestore.instance.collectionGroup('wallpapers').snapshots();
   late Future<QuerySnapshot> fetchTrendingWallpapers;
 
-  init() {
+  void init() {
     fetchTrendingWallpapers = WallpaperService.fetchTrendingWallpapers();
   }
 
@@ -42,7 +42,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: SearchBar(
-              shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+              shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
               hintText: "Search wallpapers...",
               trailing: const [Icon(Icons.search)],
             ),
@@ -88,7 +88,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                             child: Card(
                               elevation: 0,
                               margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                              color: Theme.of(context).colorScheme.surfaceVariant,
+                              color: Theme.of(context).colorScheme.surfaceContainerHighest,
                               child: const SizedBox(width: 160),
                             ),
                           ),
@@ -154,7 +154,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                                 clipBehavior: Clip.antiAlias,
                                 elevation: 0,
                                 margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-                                color: Theme.of(context).colorScheme.surfaceVariant,
+                                color: Theme.of(context).colorScheme.surfaceContainerHighest,
                                 child: SizedBox(
                                   width: 160,
                                   child: CachedNetworkImage(
@@ -213,7 +213,7 @@ class _HomeTabState extends State<HomeTab> with AutomaticKeepAliveClientMixin {
                         clipBehavior: Clip.antiAlias,
                         elevation: 0,
                         margin: const EdgeInsets.all(6),
-                        color: Theme.of(context).colorScheme.surfaceVariant,
+                        color: Theme.of(context).colorScheme.surfaceContainerHighest,
                         child: Stack(
                           fit: StackFit.expand,
                           children: [

@@ -51,8 +51,10 @@ class SettingsService {
 
     onChanged(String theme) {
       _saveTheme(theme).then((value) async {
-        Navigator.pop(context);
-        BTSWallpaperzApp.of(context).changeTheme(await loadTheme());
+        if(context.mounted) {
+          Navigator.pop(context);
+          BTSWallpaperzApp.of(context).changeTheme(await loadTheme());
+        }
       });
     }
 
@@ -63,8 +65,10 @@ class SettingsService {
 
               onChangedMaterialYou(bool newIsMaterialYou) {
                 _saveMaterialYou(newIsMaterialYou).then((value) async {
-                  setState(() => isMaterialYou = newIsMaterialYou);
-                  BTSWallpaperzApp.of(context).changeMaterialYou(await loadMaterialYou());
+                  if(context.mounted) {
+                    setState(() => isMaterialYou = newIsMaterialYou);
+                    BTSWallpaperzApp.of(context).changeMaterialYou(await loadMaterialYou());
+                  }
                 });
               }
 
@@ -287,5 +291,9 @@ class SettingsService {
     }
   }*/
 
-  static void clearCache(BuildContext context) => DefaultCacheManager().emptyCache().then((value) => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => false));
+  static void clearCache(BuildContext context) => DefaultCacheManager().emptyCache().then((value) => {
+    if(context.mounted) {
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const HomeScreen()), (route) => false)
+    }
+  });
 }

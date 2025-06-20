@@ -23,7 +23,7 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
       body: CircularMenu(
         key: key,
         items: [
@@ -148,31 +148,31 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
               : CachedNetworkImage(
             imageUrl: widget.fullResWallpaperUrl,
             fit: BoxFit.cover,
-            progressIndicatorBuilder: (_, __, ___) => Column(
+            progressIndicatorBuilder: (_, __, downloadProgress) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Card(
                   elevation: 0,
-                  color: Theme.of(context).colorScheme.surfaceVariant,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         CircularProgressIndicator(
-                          value: ___.progress,
+                          value: downloadProgress.progress,
                         ),
                         const SizedBox(height: 20),
                         const Text("Downloading full HD"),
                         const SizedBox(height: 10),
-                        if(___.totalSize != null) Text("${(___.downloaded / (1024 * 1024)).toStringAsFixed(2)} MB / ${(___.totalSize! / (1024 * 1024)).toStringAsFixed(2)} MB"),
+                        if(downloadProgress.totalSize != null) Text("${(downloadProgress.downloaded / (1024 * 1024)).toStringAsFixed(2)} MB / ${(downloadProgress.totalSize! / (1024 * 1024)).toStringAsFixed(2)} MB"),
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-            errorWidget: (_, __, ___) => const Center(
+            errorWidget: (_, __, downloadProgress) => const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

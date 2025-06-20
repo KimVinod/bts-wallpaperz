@@ -15,7 +15,7 @@ class DownloadsTab extends StatefulWidget {
 class _DownloadsTabState extends State<DownloadsTab> {
   List<File> images = [];
 
-  init() async {
+  void init() async {
       images = await WallpaperService.loadImages();
       setState(() {});
   }
@@ -52,7 +52,7 @@ class _DownloadsTabState extends State<DownloadsTab> {
                                           clipBehavior: Clip.antiAlias,
                                           elevation: 0,
                                           margin: const EdgeInsets.all(6),
-                                          color: Theme.of(context).colorScheme.surfaceVariant,
+                                          color: Theme.of(context).colorScheme.surfaceContainerHighest,
                                           child: Image.file(images[index], fit: BoxFit.fill)
                                       ),
                           ),
