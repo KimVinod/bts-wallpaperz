@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:path/path.dart';
 import 'package:bts_wallpaperz/utils/ui_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:wallpaper_manager_plus/wallpaper_manager_plus.dart';
 
 class WallpaperService {
   static Future<List<File>> loadImages() async {
@@ -130,16 +130,18 @@ class WallpaperService {
   }
 
   static Future<void> setWallpaper({required BuildContext context, required bool isDownloaded,required String imageUrl, required int wallpaperType}) async {
-    File? file = await _findFile(isDownloaded: isDownloaded, imageUrl: imageUrl);
-    if(file != null) {
-      bool result = await WallpaperManager.setWallpaperFromFile(file.path, wallpaperType);
-      if(result) {
+    try {
+      File? file = await _findFile(isDownloaded: isDownloaded, imageUrl: imageUrl);
+      if(file != null) {
+        await WallpaperManagerPlus().setWallpaper(file.path, wallpaperType);
         if(context.mounted) {
           Navigator.pop(context);
           UIComponents.showSnackBar(context, "Wallpaper has been set!");
         }
+      } else {
+        if(context.mounted) UIComponents.showSnackBar(context, "Error occurred");
       }
-    } else {
+    } catch(e) {
       if(context.mounted) UIComponents.showSnackBar(context, "Error occurred");
     }
   }

@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:bts_wallpaperz/screens/home/home_screen.dart';
 import 'package:bts_wallpaperz/services/wallpaper_service.dart';
 import 'package:bts_wallpaperz/utils/ui_constants.dart';
-import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:wallpaper_manager_plus/wallpaper_manager_plus.dart';
 
 class WallpaperScreen extends StatefulWidget {
   final String fullResWallpaperUrl;
@@ -64,7 +64,7 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
                                   contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                                   onTap: () async {
                                     clicked();
-                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManager.HOME_SCREEN);
+                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManagerPlus.homeScreen);
                                   },
                                 ),
                                 ListTile(
@@ -72,7 +72,7 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
                                   contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                                   onTap: () async {
                                     clicked();
-                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManager.LOCK_SCREEN);
+                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManagerPlus.lockScreen);
                                   },
                                 ),
                                 ListTile(
@@ -80,7 +80,7 @@ class _WallpaperScreenState extends State<WallpaperScreen> {
                                   contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                                   onTap: () async {
                                     clicked();
-                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManager.BOTH_SCREEN);
+                                    WallpaperService.setWallpaper(context: context, isDownloaded: widget.isDownloaded, imageUrl: widget.fullResWallpaperUrl, wallpaperType: WallpaperManagerPlus.bothScreens);
                                   },
                                 ),
                               ],
